@@ -8,10 +8,12 @@ import { getInputValue } from './get-input-value';
 let component;
 
 const getUserData = () => ({
+  username: getInputValue(component.refs.username),
   email: getInputValue(component.refs.emailAddress),
   password: getInputValue(component.refs.password),
   profile: {
     name: {
+      user: getInputValue(component.refs.username),
       first: getInputValue(component.refs.firstName),
       last: getInputValue(component.refs.lastName),
     },
@@ -40,6 +42,11 @@ const validate = () => {
       lastName: {
         required: true,
       },
+      username: {
+        required: true,
+        minlength: 6,
+        maxlength: 10,
+      },
       emailAddress: {
         required: true,
         email: true,
@@ -51,19 +58,27 @@ const validate = () => {
     },
     messages: {
       firstName: {
-        required: 'First name?',
+        required: "What's your first name?",
       },
       lastName: {
-        required: 'Last name?',
+        required: "What's your last name?",
+      },
+      username: {
+        required: "Create a cool username for yourself!",
       },
       emailAddress: {
-        required: 'Need an email address here.',
-        email: 'Is this email address legit?',
+        required: 'Need an email address here, better not be fake.',
+        email: 'Is this email legit?',
       },
       password: {
         required: 'Need a password here.',
         minlength: 'Use at least six characters, please.',
       },
+    },
+    errorPlacement( error, element ) {
+      if ( element.attr( 'name' ) === 'username' ) {
+        error.insertAfter( '.input-group.username' );
+      }
     },
     submitHandler() { signUp(); },
   });
