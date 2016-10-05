@@ -14,7 +14,7 @@ export class Signup extends React.Component {
 
   render() {
     return <Row>
-      <Col xs={ 12 } sm={ 6 } md={ 4 }>
+      <Col xs={ 12 } sm={ 6 } md={ 6 }>
         <h4 className="page-header">Sign Up</h4>
         <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
           <Row>
@@ -41,6 +41,18 @@ export class Signup extends React.Component {
               </FormGroup>
             </Col>
           </Row>
+          <FormGroup>
+            <ControlLabel>Username</ControlLabel>
+            <div className="input-group username">
+              <div className="input-group-addon">@</div>
+              <FormControl
+              type="text"
+              ref="username"
+              name="username"
+              placeholder="Username"
+              />
+            </div>
+          </FormGroup>
           <FormGroup>
             <ControlLabel>Email Address</ControlLabel>
             <FormControl
