@@ -91,6 +91,13 @@ p {
 	position: relative;
 }
 
+.menu-image {
+	background-color: red;
+	height: 500px;
+	width: 450px;
+	padding: 10px;
+}
+
 .landing-menu {
 	background: url("/images/menu.jpg");
 	min-height: 200px;

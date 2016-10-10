@@ -24,8 +24,6 @@ export class test extends Component {
             <DocumentsList />
           </div>
           <div className="container app-footer">
-            <h6>Press 'Enter' or click on progress bar for next step.</h6>
-            Code is on <a href="https://github.com/Srdjan/react-multistep" target="_blank">github</a>
           </div>
         </div>
       </main>
