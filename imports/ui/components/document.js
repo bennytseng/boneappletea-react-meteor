@@ -21,9 +21,6 @@ const handleUpdateDocument = (documentId, event) => {
 
 const handleRemoveDocument = (documentId, event) => {
   event.preventDefault();
-  // this should be replaced with a styled solution so for now we will
-  // disable the eslint `no-alert`
-  // eslint-disable-next-line no-alert
   if (confirm('Are you sure? This is permanent.')) {
     removeDocument.call({
       _id: documentId,

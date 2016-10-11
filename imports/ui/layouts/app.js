@@ -8,8 +8,8 @@ export const App = React.createClass({
   },
   render() {
     return <div>
-      <AppNavigation />
-      <Grid>
+      <AppNavigation className="app-nav"/>
+      <Grid className="app-grid">
         { this.props.children }
       </Grid>
     </div>;
