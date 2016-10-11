@@ -11,63 +11,6 @@ import faker from 'faker';
 import { menuItems } from '../../api/plan/fooditem'
 Meteor.subscribe('menuItems');
 
-export class test2 extends Component {
-
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      restaurant: faker.name.findName()
-      // menu:
-    };
-  }
-
-  render() {
-    var subscription = menuItems.find().fetch();
-    var randomIndex = Math.floor( Math.random() * subscription.length );
-    var randomMenu = subscription[randomIndex];
-    return (
-      <main>
-        <h1>Restaurant Menu Generator</h1>
-        <hr></hr>
-        <FormGroup>
-          <ControlLabel>Restaurant Name</ControlLabel>
-          <FormControl
-            type="text"
-            ref="firstName"
-            name="firstName"
-            defaultValue={this.state.restaurant}
-          />
-        </FormGroup>
-        <Row>
-          <Col xs={ 6 } sm={ 6 }>
-            <FormGroup>
-              <ControlLabel>Menu Item</ControlLabel>
-              <FormControl
-              type="text"
-              ref="menuItem"
-              name="manuItem"
-              defaultValue={randomMenu["title"]}
-              />
-            </FormGroup>
-          </Col>
-          <Col xs={ 6 } sm={ 6 }>
-            <FormGroup>
-              <ControlLabel>Item Price</ControlLabel>
-              <FormControl
-              type="float"
-              ref="itemPrice"
-              name="itemPrice"
-              defaultValue={randomMenu["price"]}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-      </main>
-    )
-  }
-}
-
 export class test1 extends React.Component {
 
   constructor(props) {
@@ -75,19 +18,30 @@ export class test1 extends React.Component {
     var subscription = menuItems.find().fetch();
     var randomIndex = Math.floor( Math.random() * subscription.length );
     var randomMenu = subscription[randomIndex];
-    this.state = {};
+
+    this.state = {
+      restaurant: 'LA CODECORE BRASSERIE'
+    };
+
     this.state.filterText = "";
     this.state.products = [
       {
         price: '13',
-        name: 'CodeCore Meatloaf',
+        name: 'CODECORE MEATLOAF'.toLowerCase(),
       }, {
         price: randomMenu["price"],
-        name: randomMenu["title"],
+        name: randomMenu["title"].toLowerCase(),
       }
     ];
-
+    this.updateState = this.updateState.bind(this);
   }
+
+  updateState(e) {
+   this.setState({
+     restaurant: e.target.value
+   });
+  }
+
   handleUserInput(filterText) {
     this.setState({filterText: filterText});
   };
@@ -106,7 +60,7 @@ export class test1 extends React.Component {
     var id = (+ new Date() + Math.floor(Math.random() * 999999)).toString(36);
     var product = {
       id: id,
-      name: randomMenu["title"],
+      name: randomMenu["title"].toLowerCase(),
       price: randomMenu["price"],
     }
     this.state.products.push(product);
@@ -126,21 +80,27 @@ export class test1 extends React.Component {
       for (var key in product) {
         if (key == item.name && product.id == item.id) {
           product[key] = item.value;
-
         }
       }
       return product;
     });
     this.setState(newProducts);
   };
-  render() {
 
+  render() {
     return (
       <div>
-        <ProductTable onProductTableUpdate={this.handleProductTable.bind(this)} onRowAdd={this.handleAddEvent.bind(this)} onRowDel={this.handleRowDel.bind(this)} products={this.state.products} filterText={this.state.filterText}/>
+        <ProductTable
+          onProductTableUpdate={this.handleProductTable.bind(this)}
+          onRowAdd={this.handleAddEvent.bind(this)}
+          onRowDel={this.handleRowDel.bind(this)}
+          products={this.state.products}
+          filterText={this.state.filterText}
+          myRestaurantProp = {this.state.restaurant}
+          updateStateProp = {this.updateState}
+        />
       </div>
     );
-
   }
 
 }
@@ -151,12 +111,23 @@ class ProductTable extends React.Component {
     var onProductTableUpdate = this.props.onProductTableUpdate;
     var rowDel = this.props.onRowDel;
     var filterText = this.props.filterText;
+
     var product = this.props.products.map(function(product) {
       if (product.name.indexOf(filterText) === -1) {
         return;
       }
       return (<ProductRow onProductTableUpdate={onProductTableUpdate} product={product} onDelEvent={rowDel.bind(this)} key={product.id}/>)
     });
+
+    var menu = this.props.products.map(function(product) {
+      if (product.name.indexOf(filterText) === -1) {
+        return;
+      }
+      return (
+          <MenuRender onProductTableUpdate={onProductTableUpdate} product={product} key={product.id}/>
+      )
+    });
+
     return (
       <main>
         <h1>Restaurant Menu Generator</h1>
@@ -165,10 +136,11 @@ class ProductTable extends React.Component {
           <FormGroup>
           <ControlLabel>Restaurant Name</ControlLabel>
           <FormControl
-          type="text"
-          ref="restaurantName"
-          name="restaurantName"
-          defaultValue={faker.name.findName()}
+            type="text"
+            ref="restaurantName"
+            name="restaurantName"
+            defaultValue={this.props.myRestaurantProp}
+            onChange = {this.props.updateStateProp}
           />
           </FormGroup>
 
@@ -184,7 +156,11 @@ class ProductTable extends React.Component {
           </Table>
         </Col>
         <Col xs={12} sm={12} md={6} className="menu-image">
-          <div id="restaurantname"> The Gundam </div>
+          <div className="restaurantname">
+            <h1>{this.props.myRestaurantProp}</h1>
+            <hr></hr>
+            {menu}
+          </div>
         </Col>
 
 
@@ -221,12 +197,41 @@ class ProductRow extends React.Component {
   }
 
 }
+class MenuRender extends React.Component {
+  render() {
+    return (
+      <div className="menu-list-start">
+        <MenuCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+          "type": "name",
+          value: this.props.product.name,
+          id: this.props.product.id
+
+        }}/>
+        <MenuCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
+          type: "price",
+          value: this.props.product.price,
+          id: this.props.product.id
+
+        }}/>
+      </div>
+    );
+
+  }
+
+}
 class EditableCell extends React.Component {
   render() {
     return (
       <td>
         <FormControl type='text' name={this.props.cellData.type} id={this.props.cellData.id} defaultValue={this.props.cellData.value} onChange={this.props.onProductTableUpdate}/>
       </td>
+    );
+  }
+}
+class MenuCell extends React.Component {
+  render() {
+    return (
+        <div name={this.props.cellData.type} className="menu-item-end" onChange={this.props.onProductTableUpdate}>{this.props.cellData.value}</div>
     );
   }
 }

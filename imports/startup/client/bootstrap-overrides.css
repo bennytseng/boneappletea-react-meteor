@@ -37,10 +37,10 @@ main {
 
 /* Begin Fonts */
 body {
-	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	font-family: 'Lato', Helvetica, Arial, sans-serif;
 	font-weight: 700;
 	margin-bottom: 10px;
 }
@@ -60,7 +60,7 @@ h5 {
 	font-size: 18px;
 }
 p {
-	font: 14px/1.5em "Roboto";
+	font: 14px/1.5em "Lato";
 }
 .navbar-nav > li > a {
 	font-family: "Lato", Helvetica, Arial, sans-serif;
@@ -91,11 +91,25 @@ p {
 	position: relative;
 }
 
+.restaurantname {
+	font-weight: 100;
+	font-family: "Lato";
+	font-style: italic;
+	letter-spacing: 1.5px;
+	font-size: 28px;
+}
+
 .menu-image {
-	background-color: red;
-	height: 500px;
+	background: url("/images/menu-template.jpg");
+	min-height: 500px;
 	width: 450px;
 	padding: 10px;
+	font-family: "Lato";
+	text-align: center;
+}
+
+.menu-item-end {
+	margin-bottom: 5px;
 }
 
 .menu-item-table {

@@ -13,7 +13,7 @@ export const Index = () => (
       </div>
     </Row>
     <Row className="about-section page bg-style1 text-center">
-      <h2 style={{ fontStyle:'italic'}}>What is boneappletea?</h2>
+      <h2 style={{ fontFamily:'Lato', letterSpacing:"2px"}}>what is boneappletea?</h2>
       <div className="devider"></div>
       <Row>
         <Col sm={12} md={4}>
