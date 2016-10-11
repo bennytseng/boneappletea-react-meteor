@@ -13,7 +13,7 @@ export class Login extends React.Component {
   }
 
   render() {
-    return <Row>
+    return <Row className="login-page">
       <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 4 } mdOffset={ 4 }>
         <h4 className="page-header">Login</h4>
         <form ref="login" className="login" onSubmit={ this.handleSubmit }>

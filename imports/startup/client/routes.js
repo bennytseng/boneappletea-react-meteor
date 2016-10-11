@@ -6,21 +6,24 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { App } from '../../ui/layouts/app';
 
 import { Index } from '../../ui/pages/index';
-
-import mapApp from '../../ui/pages/map';
-
-import { test } from '../../ui/pages/new';
-import { test1 } from '../../ui/pages/test';
-import { Documents } from '../../ui/pages/documents';
-
-
-import { MenuGenerator } from '../../ui/pages/menu';
-
 import { Login } from '../../ui/pages/login';
 import { NotFound } from '../../ui/pages/not-found';
 import { RecoverPassword } from '../../ui/pages/recover-password';
 import { ResetPassword } from '../../ui/pages/reset-password';
 import { Signup } from '../../ui/pages/signup';
+
+
+//work in progress
+import mapApp from '../../ui/pages/map';
+
+//testing pages
+import { newtest } from '../../ui/pages/new';
+import { MyStatefulEditor } from '../../ui/pages/test';
+import { Documents } from '../../ui/pages/documents';
+
+//complete
+import { MenuGenerator } from '../../ui/pages/menu';
+
 
 const requireAuth = (nextState, replace) => {
   if (!Meteor.loggingIn() && !Meteor.userId()) {
@@ -37,9 +40,9 @@ Meteor.startup(() => {
       <Route path="/" component={ App }>
         <IndexRoute name="index" component={ Index } />
 
-        <Route name="test" path="/test" component={ test1 } onEnter={ requireAuth } />
+        <Route name="Create new Plan" path="/new" component={ newtest } onEnter={ requireAuth } />
+        <Route name="test" path="/test" component={ MyStatefulEditor } onEnter={ requireAuth } />
 
-        <Route name="Create new Plan" path="/new" component={ test } onEnter={ requireAuth } />
         <Route name="Menu" path="/menu" component={ MenuGenerator } onEnter={ requireAuth } />
         <Route name="Plan Research" path="/research" component={ mapApp } onEnter={ requireAuth } />
 
