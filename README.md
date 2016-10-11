@@ -1,4 +1,11 @@
-# The Meteor Chef - Base
+
+
+# boneappletea
+
+A restaurant business plan generator, with hipster inspired verbiage, to get you started on your business. It can also be French for when food tastes hella good. Made with Meteor and React mainly. Relied on boilerplate Meteor Base:
+
+
+Meteor Base
 A starting point for Meteor apps.
 
 <table>

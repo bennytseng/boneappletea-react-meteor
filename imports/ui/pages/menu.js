@@ -4,14 +4,11 @@ import {
   Component,
   PropTypes,
 } from "react";
-
-import { Row, Col, Modal, Button,Form, FormGroup, ControlLabel, FormControl, HelpBlock, Table} from 'react-bootstrap';
-import faker from 'faker';
-
+import { Row, Col, Button, Form, FormGroup, ControlLabel, FormControl, Table} from 'react-bootstrap';
 import { menuItems } from '../../api/plan/fooditem'
 Meteor.subscribe('menuItems');
 
-export class test1 extends React.Component {
+export class MenuGenerator extends React.Component {
 
   constructor(props) {
     super(props);
@@ -179,22 +176,18 @@ class ProductRow extends React.Component {
           "type": "name",
           value: this.props.product.name,
           id: this.props.product.id
-
         }}/>
         <EditableCell onProductTableUpdate={this.props.onProductTableUpdate} cellData={{
           type: "price",
           value: this.props.product.price,
           id: this.props.product.id
-
         }}/>
         <td className="del-cell">
           <Button onClick={this.onDelEvent.bind(this)} bsStyle="danger">Delete</Button>
         </td>
       </tr>
     );
-
   }
-
 }
 class MenuRender extends React.Component {
   render() {
@@ -204,9 +197,7 @@ class MenuRender extends React.Component {
         <br/>
       </div>
     );
-
   }
-
 }
 class EditableCell extends React.Component {
   render() {

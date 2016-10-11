@@ -9,7 +9,7 @@ export const Index = () => (
       <h2 style={ { fontSize: '48px', color: 'white' } }>Starting a Restaurant?</h2>
       <p style={ { fontSize: '22px', color: 'white' } }>Let us build your Restaurant Business Plan.</p>
       <p><a className="btn btn-success" href="/signup" role="button">Sign Up Now</a></p>
-      <p style={ { fontSize: '16px', color: '#eeecec', fontStyle: 'italic' } }>Menu Generator, Location Research and more</p>
+      <p style={ { fontSize: '16px', color: 'white', fontStyle: 'italic' } }>Menu Generator, Location Research and more</p>
       </div>
     </Row>
     <Row className="about-section page bg-style1 text-center">
@@ -37,12 +37,12 @@ export const Index = () => (
     <Row className="text-center image-wrap-pic">
       <Col sm={12} md={6} className="landing-menu">
         <div className="landing-page-content">
-        <h2 style={ { fontSize: '32px', color: 'rgb(45, 47, 46)', fontStyle:'italic' } }>Your Menu</h2>
+        <h2 style={ { fontSize: '36px', color: 'rgb(45, 47, 46)'} }></h2>
         </div>
       </Col>
       <Col sm={12} md={6} className="landing-spaces">
         <div className="landing-page-content">
-        <h2 style={ { fontSize: '32px', color: 'rgb(45, 47, 46)', fontStyle:'italic' } }>Your Setup</h2>
+        <h2 style={ { fontSize: '36px', color: 'rgb(45, 47, 46)'} }></h2>
         </div>
       </Col>
     </Row>

@@ -18,16 +18,19 @@ export const AuthenticatedNavigation = () => (
       <LinkContainer to="/new">
         <NavItem eventKey={ 1 } href="/new">Create a Plan</NavItem>
       </LinkContainer>
+      <LinkContainer to="/menu">
+        <NavItem eventKey={ 2 } href="/menu">Design a Menu</NavItem>
+      </LinkContainer>
       <LinkContainer to="/test">
-      <NavItem eventKey={ 2 } href="/test">test</NavItem>
+      <NavItem eventKey={ 3 } href="/test">test</NavItem>
       </LinkContainer>
       <LinkContainer to="/research">
-        <NavItem eventKey={ 3 } href="/research">Plan Research</NavItem>
+        <NavItem eventKey={ 4 } href="/research">Plan Research</NavItem>
       </LinkContainer>
     </Nav>
     <Nav pullRight>
-      <NavDropdown eventKey={ 4 } title={ userName() } id="basic-nav-dropdown">
-        <MenuItem eventKey={ 4.1 } onClick={ handleLogout }>Logout</MenuItem>
+      <NavDropdown eventKey={ 5 } title={ userName() } id="basic-nav-dropdown">
+        <MenuItem eventKey={ 5.1 } onClick={ handleLogout }>Logout</MenuItem>
       </NavDropdown>
     </Nav>
   </div>

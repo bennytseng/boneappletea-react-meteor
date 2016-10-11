@@ -96,13 +96,12 @@ p {
 	font-family: "Lato";
 	font-style: italic;
 	letter-spacing: 1.5px;
-	font-size: 28px;
 }
 
 .menu-image {
 	background: url("/images/menu-template.jpg");
-	min-height: 500px;
-	width: 450px;
+	min-height: 350px;
+	width: 575px;
 	padding: 10px;
 	font-family: "Lato";
 	text-align: center;
@@ -114,6 +113,11 @@ p {
 
 .menu-item-table {
 	padding: 10px;
+}
+
+.menu-list-start {
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
 .landing-menu {

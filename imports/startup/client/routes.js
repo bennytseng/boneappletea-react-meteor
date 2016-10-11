@@ -11,8 +11,10 @@ import mapApp from '../../ui/pages/map';
 
 import { test } from '../../ui/pages/new';
 import { test1 } from '../../ui/pages/test';
-
 import { Documents } from '../../ui/pages/documents';
+
+
+import { MenuGenerator } from '../../ui/pages/menu';
 
 import { Login } from '../../ui/pages/login';
 import { NotFound } from '../../ui/pages/not-found';
@@ -35,8 +37,10 @@ Meteor.startup(() => {
       <Route path="/" component={ App }>
         <IndexRoute name="index" component={ Index } />
 
-        <Route name="Create new Plan" path="/new" component={ test } onEnter={ requireAuth } />
         <Route name="test" path="/test" component={ test1 } onEnter={ requireAuth } />
+
+        <Route name="Create new Plan" path="/new" component={ test } onEnter={ requireAuth } />
+        <Route name="Menu" path="/menu" component={ MenuGenerator } onEnter={ requireAuth } />
         <Route name="Plan Research" path="/research" component={ mapApp } onEnter={ requireAuth } />
 
         <Route name="login" path="/login" component={ Login } />
