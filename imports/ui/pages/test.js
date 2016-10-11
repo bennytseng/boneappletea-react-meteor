@@ -132,7 +132,6 @@ export class test1 extends React.Component {
       return product;
     });
     this.setState(newProducts);
-    console.log(this.state.products);
   };
   render() {
 
@@ -173,8 +172,8 @@ class ProductTable extends React.Component {
           />
           </FormGroup>
 
-          <Button type="button" onClick={this.props.onRowAdd} bsStyle="success">Add</Button>
-          <Table bordered striped hover>
+          <Button type="button" onClick={this.props.onRowAdd} bsStyle="success">Add Menu Item</Button>
+          <Table className="menu-item-table" bordered striped hover>
           <thead>
           <tr>
           <th>Menu Item</th>
@@ -191,9 +190,7 @@ class ProductTable extends React.Component {
 
       </main>
     );
-
   }
-
 }
 
 class ProductRow extends React.Component {
@@ -213,7 +210,7 @@ class ProductRow extends React.Component {
           type: "price",
           value: this.props.product.price,
           id: this.props.product.id
-          
+
         }}/>
         <td className="del-cell">
           <Button onClick={this.onDelEvent.bind(this)} bsStyle="danger">Delete</Button>

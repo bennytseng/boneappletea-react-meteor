@@ -98,6 +98,10 @@ p {
 	padding: 10px;
 }
 
+.menu-item-table {
+	padding: 10px;
+}
+
 .landing-menu {
 	background: url("/images/menu.jpg");
 	min-height: 200px;
