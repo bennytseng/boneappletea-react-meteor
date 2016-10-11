@@ -59,7 +59,6 @@ export class MenuGenerator extends React.Component {
     }
     this.state.products.push(product);
     this.setState(this.state.products);
-    console.log(this.state.products);
   }
 
   handleProductTable(evt) {
@@ -79,7 +78,6 @@ export class MenuGenerator extends React.Component {
       return product;
     });
     this.setState(newProducts);
-    console.log(this.state.products);
   };
 
   render() {
@@ -140,7 +138,7 @@ class ProductTable extends React.Component {
           />
           </FormGroup>
 
-          <Button type="button" onClick={this.props.onRowAdd} bsStyle="success">Add Menu Item</Button>
+          <Button style={ { marginBottom: '15px'} } type="button" onClick={this.props.onRowAdd} bsStyle="success">Add Menu Item</Button>
           <Table className="menu-item-table" bordered striped hover>
           <thead>
           <tr>
