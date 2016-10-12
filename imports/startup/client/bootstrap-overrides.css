@@ -26,9 +26,14 @@ main {
 
 footer {
 	background-color: #363940;
-	min-height: 150px;
+	min-height: 200px;
 	color: #fff;
 	padding: 10px;
+}
+
+.app-grid {
+	min-height: 450px;
+	margin-bottom: 20px;
 }
 
 .cover {

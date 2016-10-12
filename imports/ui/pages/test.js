@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import RichTextEditor from 'react-rte';
-import {Button, Modal} from 'react-bootstrap'
+import {Button, Modal, Col} from 'react-bootstrap'
 
 export class MyStatefulEditor extends Component {
 
@@ -14,6 +14,7 @@ export class MyStatefulEditor extends Component {
   }
 
   onChange = (value) => {
+  console.log(this.state.value);
     this.setState({value});
     if (this.props.onChange) {
       this.props.onChange(
@@ -38,13 +39,16 @@ export class MyStatefulEditor extends Component {
         value={this.state.value}
         onChange={this.onChange}
         />
-        <Button bsStyle="success" onClick={this.open.bind(this)}>Submit</Button>
-
+        <hr/>
+        <Col xs={12} sm={6} smOffset={3} md={4} mdOffset={4}>
+          <Button bsStyle="success" onClick={this.open.bind(this)} block>Submit</Button>
+        </Col>
+        <br/>
         <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title>Review and Finalize</Modal.Title>
           </Modal.Header>
-          <Modal.Body>hm...</Modal.Body>
+          <Modal.Body>{this.state.value.toString('html')}</Modal.Body>
           <Modal.Footer>
             <Button bsStyle="danger" onClick={this.close.bind(this)}>Close</Button>
             <Button bsStyle="success" onClick={this.close.bind(this)}>Finalize</Button>
