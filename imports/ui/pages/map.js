@@ -37,6 +37,18 @@ const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   </GoogleMap>
 ));
 
+const geolocation = (
+  canUseDOM && navigator.geolocation ?
+  navigator.geolocation :
+  ({
+    getCurrentPosition(success, failure) {
+      failure(`Your browser doesn't support geolocation.`);
+    },
+  })
+);
+
+
+
 export default class mapApp extends Component {
 
   state = {

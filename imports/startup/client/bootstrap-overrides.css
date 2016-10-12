@@ -33,7 +33,6 @@ footer {
 
 .app-grid {
 	min-height: 450px;
-	margin-bottom: 20px;
 }
 
 .cover {
@@ -44,6 +43,10 @@ footer {
 	top: 0px;
 	background-color: rgba(0, 46, 82, 0.15);
 	padding: 20px;
+}
+
+.plan-submit-btn {
+	margin-bottom: 20px;
 }
 
 .page {
@@ -137,6 +140,7 @@ p {
 	padding: 10px;
 	font-family: "Lato";
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 .menu-item-end {
