@@ -17,7 +17,7 @@ export class MenuGenerator extends React.Component {
     var randomMenu = subscription[randomIndex];
 
     this.state = {
-      restaurant: 'LA CODECORE BRASSERIE'
+      restaurant: 'CODECORE RESTAURANT'
     };
 
     this.state.filterText = "";

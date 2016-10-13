@@ -1,45 +1,74 @@
-import _ from "lodash";
-
 import {
   default as React,
   Component,
   PropTypes,
 } from "react";
 
-import FaSpinner from "react-icons/lib/fa/spinner";
-
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
-
 import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
+  InfoWindow,
 } from 'react-google-maps';
+
+import _ from "lodash";
+import canUseDOM from "can-use-dom";
+import raf from "raf";
+import FaSpinner from "react-icons/lib/fa/spinner";
+import withScriptjs from "react-google-maps/lib/async/withScriptjs";
+import {FormControl} from 'react-bootstrap';
+import DocumentsList from '../containers/documents-list.js';
+import { AddDocument } from '../components/add-document.js';
 
 let gmapAPI = Meteor.settings.public.gmaps
 
 const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   withScriptjs,
   withGoogleMap,
-)(props => (
-  <GoogleMap
-    ref={props.onMapLoad}
-    defaultZoom={16}
-    defaultCenter={{ lat: 49.2819605, lng: -123.1086604 }}
-    onClick={props.onMapClick}
-  >
-    {props.markers.map(marker => (
+  )(props => (
+    <GoogleMap
+      ref={props.onMapLoad}
+      defaultZoom={16}
+      center={props.center}
+      onClick={props.onMapClick}
+    >
+
+    {props.markers.map((marker, index) => (
       <Marker
         {...marker}
+        key={index}
+        position={marker.position}
+        onClick={()=> props.onMarkerClick(marker)}
         onRightClick={() => props.onMarkerRightClick(marker)}
-      />
+      >
+      {marker.showInfo && (
+        <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
+          <AddDocument />
+        </InfoWindow>
+      )}
+      </Marker>
     ))}
-  </GoogleMap>
-));
+
+    {props.center && (
+      <Circle
+        center={props.center}
+        radius={props.radius}
+        options={{
+          fillColor: `red`,
+          fillOpacity: 0.20,
+          strokeColor: `red`,
+          strokeOpacity: 1,
+          strokeWeight: 1,
+        }}
+      />
+    )}
+    </GoogleMap>
+  ));
 
 const geolocation = (
-  canUseDOM && navigator.geolocation ?
-  navigator.geolocation :
+    canUseDOM && navigator.geolocation ?
+    navigator.geolocation :
   ({
     getCurrentPosition(success, failure) {
       failure(`Your browser doesn't support geolocation.`);
@@ -47,24 +76,68 @@ const geolocation = (
   })
 );
 
-
-
 export default class mapApp extends Component {
-
-  state = {
-    markers: [{
-      position: {
-        lat: 49.2819605,
-        lng: -123.1086604,
-      },
-      key: `CodeCore Cafe`,
-      defaultAnimation: 2,
-    }],
-  }
 
   handleMapLoad = this.handleMapLoad.bind(this);
   handleMapClick = this.handleMapClick.bind(this);
   handleMarkerRightClick = this.handleMarkerRightClick.bind(this);
+  handleMarkerClick = this.handleMarkerClick.bind(this);
+  handleMarkerClose = this.handleMarkerClose.bind(this);
+
+  state = {
+    center: null,
+    radius: 35,
+  }
+  isUnmounted = false;
+
+  componentDidMount() {
+  const tick = () => {
+    if (this.isUnmounted) {
+      return;
+    }
+    this.setState({ radius: Math.max(this.state.radius - 20, 0) });
+
+    if (this.state.radius > 200) {
+      raf(tick);
+    }
+  };
+
+  geolocation.getCurrentPosition((position) => {
+  if (this.isUnmounted) {
+    return;
+  }
+  this.setState({
+    center: {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    },
+    markers: [{
+      position: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      defaultAnimation: 2,
+    }],
+  });
+
+  raf(tick);
+  }, (reason) => {
+    if (this.isUnmounted) {
+      return;
+    }
+    this.setState({
+      center: {
+        lat: 60,
+        lng: 105,
+      },
+    });
+  });
+  }
+
+  componentWillUnmount() {
+  this.isUnmounted = true;
+  }
+
 
   handleMapLoad(map) {
     this._mapComponent = map;
@@ -87,6 +160,34 @@ export default class mapApp extends Component {
     });
   }
 
+  handleMarkerClick(targetMarker) {
+    this.setState({
+      markers: this.state.markers.map(marker => {
+        if (marker === targetMarker) {
+          return {
+            ...marker,
+            showInfo: true,
+          };
+        }
+        return marker;
+      }),
+    });
+  }
+
+  handleMarkerClose(targetMarker) {
+    this.setState({
+      markers: this.state.markers.map(marker => {
+        if (marker === targetMarker) {
+          return {
+            ...marker,
+            showInfo: false,
+          };
+        }
+        return marker;
+      }),
+    });
+  }
+
   handleMarkerRightClick(targetMarker) {
 
     const nextMarkers = this.state.markers.filter(marker => marker !== targetMarker);
@@ -97,11 +198,13 @@ export default class mapApp extends Component {
 
   render() {
     return (
-      <AsyncGettingStartedExampleGoogleMap
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCZ2bkxdQieKsrJ3GWRoHIuqO0ASpEK6Wk"
-        loadingElement={
-          <div style={{ height: `100%` }}>
-            <FaSpinner
+      <div className="map-page">
+        <div className="map-page-container">
+          <AsyncGettingStartedExampleGoogleMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCZ2bkxdQieKsrJ3GWRoHIuqO0ASpEK6Wk"
+            loadingElement={
+              <div style={{ height: `100%` }}>
+              <FaSpinner
               style={{
                 display: `block`,
                 width: `80px`,
@@ -109,20 +212,27 @@ export default class mapApp extends Component {
                 margin: `150px auto`,
                 animation: `fa-spin 2s infinite linear`,
               }}
-            />
-          </div>
-        }
-        containerElement={
-          <div style={{ height: `500px` }} />
-        }
-        mapElement={
-          <div style={{ height: `100%` }} />
-        }
-        onMapLoad={this.handleMapLoad}
-        onMapClick={this.handleMapClick}
-        markers={this.state.markers}
-        onMarkerRightClick={this.handleMarkerRightClick}
-      />
+              />
+              </div>
+            }
+            containerElement={
+              <div style={{ height: `500px` }} />
+            }
+            mapElement={
+              <div style={{ height: `100%` }} />
+            }
+            onMapLoad={this.handleMapLoad}
+            onMapClick={this.handleMapClick}
+            markers={this.state.markers}
+            onMarkerClick={this.handleMarkerClick}
+            onMarkerClose={this.handleMarkerClose}
+            onMarkerRightClick={this.handleMarkerRightClick}
+            center={this.state.center}
+            radius={this.state.radius}
+          />
+        </div>
+        <DocumentsList />
+      </div>
     );
   }
 }

@@ -13,7 +13,7 @@ const handleUpdateDocument = (documentId, event) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert('Document updated!', 'success');
+        Bert.alert('Note updated!', 'success');
       }
     });
   }
@@ -28,7 +28,7 @@ const handleRemoveDocument = (documentId, event) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert('Document removed!', 'success');
+        Bert.alert('Note removed!', 'success');
       }
     });
   }

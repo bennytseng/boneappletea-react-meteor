@@ -12,15 +12,7 @@ import { RecoverPassword } from '../../ui/pages/recover-password';
 import { ResetPassword } from '../../ui/pages/reset-password';
 import { Signup } from '../../ui/pages/signup';
 
-
-//work in progress
-import mapApp from '../../ui/pages/map2';
-
-//testing pages
-import { test } from '../../ui/pages/test';
-import { Documents } from '../../ui/pages/documents';
-
-//complete
+import mapApp from '../../ui/pages/map';
 import { NewPlan } from '../../ui/pages/new';
 import { MenuGenerator } from '../../ui/pages/menu';
 
@@ -41,8 +33,6 @@ Meteor.startup(() => {
         <IndexRoute name="index" component={ Index } />
 
         <Route name="Create new Plan" path="/new" component={ NewPlan } onEnter={ requireAuth } />
-        <Route name="test" path="/test" component={ test } onEnter={ requireAuth } />
-
         <Route name="Menu" path="/menu" component={ MenuGenerator } onEnter={ requireAuth } />
         <Route name="Plan Research" path="/research" component={ mapApp } onEnter={ requireAuth } />
 

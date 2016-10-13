@@ -14,19 +14,18 @@ const handleInsertDocument = (event) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        target.value = '';
-        Bert.alert('Document added!', 'success');
+        Bert.alert('Note added!', 'success');
       }
     });
   }
 };
 
 export const AddDocument = () => (
-  <FormGroup>
+  <FormGroup controlId="formControlsTextarea">
     <FormControl
-      type="text"
+      componentClass="textarea"
       onKeyUp={ handleInsertDocument }
-      placeholder="Type a document title and press enter..."
+      placeholder="Notes"
     />
   </FormGroup>
 );

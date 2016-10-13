@@ -24,6 +24,10 @@ main {
 	flex: 1;
 }
 
+.RichTextEditor__root___2QXK- {
+	margin-top: 20px;
+}
+
 footer {
 	background-color: #363940;
 	min-height: 200px;
@@ -31,6 +35,13 @@ footer {
 	padding: 10px;
 }
 
+.footer-right {
+	margin-top: 30px;
+}
+
+.footer-right > h5 {
+	margin: 15px;
+}
 .app-grid {
 	min-height: 450px;
 }
@@ -91,11 +102,17 @@ p {
 	font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
+.landing-page-name {
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 300px;
+	min-height: 200px;
+}
+
 .landing-page {
 	background: url("/images/background1.jpg") no-repeat center center fixed;
 	background-size: cover;
-	margin-right: -150px;
-	margin-left: -150px;
+	margin-right: -75px;
+	margin-left: -75px;
 	height: 300px;
 	min-height: 200px;
 	position: relative;
@@ -104,15 +121,15 @@ p {
 .landing-restaurant {
 	background: url("/images/background3.jpg") no-repeat center center fixed;
 	background-size: cover;
-	margin-right: -150px;
-	margin-left: -150px;
+	margin-right: -75px;
+	margin-left: -75px;
 	height: 300px;
 	min-height: 200px;
 	position: relative;
 }
 .image-wrap-pic {
-	margin-right: -150px;
-	margin-left: -150px;
+	margin-right: -75px;
+	margin-left: -75px;
 	position: relative;
 }
 
@@ -174,6 +191,22 @@ p {
   left: 50%;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   transform: translate(-50%, -50%);
+}
+
+.login-page, .signup-page {
+	background-color: rgba(255, 255, 255, 0.7);
+	min-height: 450px;
+}
+
+.login-page-lighten, .signup-page-lighten {
+	margin-left: -75px;
+	margin-right: -75px;
+	min-height: 450px;
+	background: url("/images/login.jpg");
+}
+
+.map-page-container {
+	margin: 15px;
 }
 
 .about-icon {

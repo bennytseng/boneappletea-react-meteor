@@ -6,7 +6,7 @@ export const DocumentsList = ({documents}) => (documents.length > 0
   ? <ListGroup className="documents-list">
       {documents.map((doc) => (<Document key={doc._id} document={doc}/>))}
     </ListGroup>
-  : <Alert bsStyle="warning">No documents yet.</Alert>);
+  : <Alert bsStyle="warning">No notes yet.</Alert>);
 
 DocumentsList.propTypes = {
   documents: React.PropTypes.array

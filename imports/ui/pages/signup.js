@@ -14,69 +14,71 @@ export class Signup extends React.Component {
 
   render() {
     return (
-      <Row className="signup-page">
-        <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 6 } mdOffset={ 3 }>
-          <h4 className="page-header">Sign Up</h4>
-          <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
-            <Row>
-              <Col xs={ 6 } sm={ 6 }>
-                <FormGroup>
-                  <ControlLabel>First Name</ControlLabel>
+      <div className="signup-page-lighten">
+        <Row className="signup-page">
+          <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 6 } mdOffset={ 3 }>
+            <h4 className="page-header">Sign Up</h4>
+            <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
+              <Row>
+                <Col xs={ 6 } sm={ 6 }>
+                  <FormGroup>
+                    <ControlLabel>First Name</ControlLabel>
+                    <FormControl
+                      type="text"
+                      ref="firstName"
+                      name="firstName"
+                      placeholder="First Name"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col xs={ 6 } sm={ 6 }>
+                  <FormGroup>
+                    <ControlLabel>Last Name</ControlLabel>
+                    <FormControl
+                      type="text"
+                      ref="lastName"
+                      name="lastName"
+                      placeholder="Last Name"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <FormGroup>
+                <ControlLabel>Username</ControlLabel>
+                <div className="input-group username">
+                  <div className="input-group-addon">@</div>
                   <FormControl
-                    type="text"
-                    ref="firstName"
-                    name="firstName"
-                    placeholder="First Name"
+                  type="text"
+                  ref="username"
+                  name="username"
+                  placeholder="Username"
                   />
-                </FormGroup>
-              </Col>
-              <Col xs={ 6 } sm={ 6 }>
-                <FormGroup>
-                  <ControlLabel>Last Name</ControlLabel>
-                  <FormControl
-                    type="text"
-                    ref="lastName"
-                    name="lastName"
-                    placeholder="Last Name"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <FormGroup>
-              <ControlLabel>Username</ControlLabel>
-              <div className="input-group username">
-                <div className="input-group-addon">@</div>
+                </div>
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Email Address</ControlLabel>
                 <FormControl
-                type="text"
-                ref="username"
-                name="username"
-                placeholder="Username"
+                  type="text"
+                  ref="emailAddress"
+                  name="emailAddress"
+                  placeholder="Email Address"
                 />
-              </div>
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Email Address</ControlLabel>
-              <FormControl
-                type="text"
-                ref="emailAddress"
-                name="emailAddress"
-                placeholder="Email Address"
-              />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Password</ControlLabel>
-              <FormControl
-                type="password"
-                ref="password"
-                name="password"
-                placeholder="Password"
-              />
-            </FormGroup>
-            <Button type="submit" bsStyle="success">Sign Up</Button>
-          </form>
-          <p>Already have an account? <Link to="/login">Log In</Link>.</p>
-        </Col>
-      </Row>
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Password</ControlLabel>
+                <FormControl
+                  type="password"
+                  ref="password"
+                  name="password"
+                  placeholder="Password"
+                />
+              </FormGroup>
+              <Button type="submit" bsStyle="success">Sign Up</Button>
+            </form>
+            <p>Already have an account? <Link to="/login">Log In</Link>.</p>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }
